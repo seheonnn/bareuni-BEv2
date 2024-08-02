@@ -1,0 +1,7 @@
+rootProject.name = 'bareuniV2'
+include 'api'
+include 'core:core-domain'
+include 'core:core-infra-db'
+include 'core:core-infra-redis'
+findProject(':core:core-infra-redis')?.name = 'core-infra-redis'
+
