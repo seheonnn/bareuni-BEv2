@@ -31,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class JwtUtil {
 
-	private static final String ID = "id";
 	private static final String EMAIL = "email";
 	private static final String ROLE = "role";
 	private final SecretKey secretKey;
@@ -96,7 +95,7 @@ public class JwtUtil {
 		return refreshToken;
 	}
 
-	public JwtDto reissueToken(String refreshToken) throws SignatureException {
+	public JwtDto reissueToken(String refreshToken) {
 		try {
 			validateRefreshToken(refreshToken);
 			log.info("[*] Valid RefreshToken");
