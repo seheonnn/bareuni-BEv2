@@ -39,7 +39,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		try {
-			return userRepository.findByEmail(((CustomUserDetails)userDetails).getUsername());
+			return userRepository.findById(((CustomUserDetails)userDetails).getId())
+				.orElseThrow(() -> new SecurityCustomException(SecurityErrorCode.TOKEN_NOT_FOUND));
 		} catch (ClassCastException e) {
 			// 로그아웃된 토큰
 			throw new SecurityCustomException(SecurityErrorCode.UNAUTHORIZED);
