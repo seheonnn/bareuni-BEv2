@@ -5,6 +5,13 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# prometheus
+/grafana
+/prometheus/volume
+/prometheus/config/**.log
+!prometheus/config/prometheus.yml
+!prometheus/config/rule.yml
+
 *-secret.yml
 **/src/main/generated/
 **/out/

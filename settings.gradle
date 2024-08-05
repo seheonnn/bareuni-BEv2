@@ -5,4 +5,5 @@ include 'core:core-infra-db'
 include 'core:core-infra-redis'
 include 'core:core-infra-security'
 include 'core:core-infra-s3'
+include 'support:monitoring'
 

@@ -2,10 +2,12 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: api
   profiles:
     group:
-      "local": "db, secret, redis, security, s3"
-      "prod": "db, secret, redis, security, s3"
+      "local": "db, secret, redis, security, s3, monitoring"
+      "prod": "db, secret, redis, security, s3, monitoring"
     default: local
 
   servlet:

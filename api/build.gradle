@@ -5,6 +5,7 @@ dependencies {
     implementation project(':core:core-infra-redis')
     implementation project(':core:core-infra-security')
     implementation project(':core:core-infra-s3')
+    runtimeOnly project(':support:monitoring')
 
     // Core
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
