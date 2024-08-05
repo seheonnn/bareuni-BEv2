@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.s3temp.dto.S3Response;
-import com.example.s3temp.service.S3Service;
+import com.bareuni.coreinfras3.S3Service;
+import com.bareuni.coreinfras3.dto.S3Response;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
