@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.springframework.stereotype.Service;
 
-import com.example.s3temp.convert.ImageFormat;
-import com.example.s3temp.util.FileUtils;
+import com.bareuni.coreinfras3.convert.ImageFormat;
+import com.bareuni.coreinfras3.util.FileUtils;
 
 import lombok.RequiredArgsConstructor;
 

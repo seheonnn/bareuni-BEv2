@@ -2,7 +2,7 @@ package com.bareuni.coreinfras3.convert.webp;
 
 import java.io.File;
 
-import com.example.s3temp.convert.ImageFormat;
+import com.bareuni.coreinfras3.convert.ImageFormat;
 
 public interface WebpConvertStrategy {
 	boolean identify(ImageFormat imageFormat);

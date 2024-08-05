@@ -6,7 +6,7 @@ import java.nio.file.Files;
 
 import org.springframework.stereotype.Service;
 
-import com.example.s3temp.convert.ImageFormat;
+import com.bareuni.coreinfras3.convert.ImageFormat;
 import com.sksamuel.scrimage.ImmutableImage;
 import com.sksamuel.scrimage.webp.WebpWriter;
 
