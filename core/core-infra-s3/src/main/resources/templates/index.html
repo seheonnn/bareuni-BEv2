@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3 Pre-signed URL File Upload</title>
+</head>
+<body>
+<h1>Upload File to S3 using Pre-signed URL</h1>
+<label for="preSignedUrl">Pre-signed URL:</label>
+<input type="text" id="preSignedUrl" placeholder="Enter pre-signed URL"><br><br>
+<input type="file" id="fileInput"><br><br>
+<button onclick="uploadFile()">Upload</button>
+
+<script>
+    async function uploadFile() {
+        const preSignedUrlInput = document.getElementById('preSignedUrl');
+        const fileInput = document.getElementById('fileInput');
+
+        if (!preSignedUrlInput.value) {
+            alert('Please enter a pre-signed URL.');
+            return;
+        }
+
+        if (fileInput.files.length === 0) {
+            alert('Please select a file first.');
+            return;
+        }
+
+        const preSignedUrl = preSignedUrlInput.value;
+        const file = fileInput.files[0];
+
+        try {
+            const response = await fetch(preSignedUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': file.type || 'application/octet-stream',
+                },
+                body: file
+            });
+
+            if (response.ok) {
+                alert('File uploaded successfully!');
+            } else {
+                const errorMessage = await response.text();
+                alert('File upload failed. Status: ' + response.status + ' Message: ' + errorMessage);
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            alert('Error uploading file. See console for details.');
+        }
+    }
+</script>
+</body>
+</html>
