@@ -22,7 +22,7 @@ public record UserRegisterRequest(
 	@NotBlank(message = "[ERROR] 사용자명 입력은 필수 입니다.")
 	String username,
 
-	@NotBlank(message = "[ERROR] 사용자명 입력은 필수 입니다.")
+	@NotBlank(message = "[ERROR] 전화번호 입력은 필수 입니다.")
 	@Pattern(regexp = "^01[016789]-?(\\d{3,4})-?(\\d{4})$", message = "[ERROR] 전화번호 형식에 맞지 않습니다.")
 	String phone,
 

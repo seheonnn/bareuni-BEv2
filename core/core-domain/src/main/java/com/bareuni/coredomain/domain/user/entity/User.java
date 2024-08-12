@@ -31,37 +31,35 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userIdx")
 	private Long id;
 
-	@Column(name = "email", nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	private String email;
 
-	@Column(name = "password")
 	private String password;
 
-	@Column(name = "username", nullable = false)
+	@Column(nullable = false)
 	private String username;
 
-	@Column(name = "phone")
 	private String phone;
 
 	@Enumerated(value = EnumType.STRING)
-	@Column(name = "gender", nullable = false)
+	@Column(nullable = false)
 	private GenderType gender;
 
-	@Column(name = "age", nullable = false)
+	@Column(nullable = false)
 	private int age;
 
 	// 치아 교정 여부
-	@Column(name = "ortho", nullable = false)
+	@Column(nullable = false)
 	@ColumnDefault("false")
 	private boolean ortho;
 
 	@Enumerated(value = EnumType.STRING)
 	@ColumnDefault("'USER'")
-	@Column(name = "role", nullable = false)
+	@Column(nullable = false)
 	private RoleType role;
 }
