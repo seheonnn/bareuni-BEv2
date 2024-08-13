@@ -46,10 +46,12 @@ public class Community extends BaseEntity {
 	private User user;
 
 	@Builder.Default
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@JoinColumn(name = "community_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<CommunityImage> communityImages = new ArrayList<>();
 
 	@Builder.Default
-	@OneToMany(mappedBy = "community", cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@JoinColumn(name = "community_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<Comment> comments = new ArrayList<>();
 }

@@ -34,5 +34,5 @@ public class ReviewImage {
 
 	private String url;
 
-	private Integer order;
+	private int imageOrder;
 }

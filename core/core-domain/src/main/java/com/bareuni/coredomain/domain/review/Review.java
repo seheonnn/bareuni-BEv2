@@ -3,7 +3,6 @@ package com.bareuni.coredomain.domain.review;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bareuni.coredomain.domain.hospital.Hospital;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.BaseEntity;
 
@@ -44,12 +43,9 @@ public class Review extends BaseEntity {
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private User user;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-	private Hospital hospital;
-
 	@Builder.Default
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<ReviewImage> reviewImages = new ArrayList<>();
 
 	// 별점

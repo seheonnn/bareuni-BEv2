@@ -1,4 +1,4 @@
-package com.bareuni.coredomain.domain.hospital;
+package com.bareuni.coredomain.domain.user;
 
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,19 +21,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "hospital_image")
-public class HospitalImage {
+@Table(name = "user_image")
+public class UserImage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-	private Hospital hospital;
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+	private User user;
 
 	private String url;
-
-	private int imageOrder;
 }
-

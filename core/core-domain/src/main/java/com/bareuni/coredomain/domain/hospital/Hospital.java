@@ -12,11 +12,13 @@ import com.bareuni.coredomain.global.BaseEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -32,7 +34,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "user")
+@Table(name = "hospital")
 public class Hospital extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,11 +71,13 @@ public class Hospital extends BaseEntity {
 	private String summary;
 
 	@Builder.Default
-	@OneToMany(mappedBy = "hospital", cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<Review> reviews = new ArrayList<>();
 
 	@Builder.Default
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+	@JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<HospitalImage> hospitalImages = new ArrayList<>();
 
 }

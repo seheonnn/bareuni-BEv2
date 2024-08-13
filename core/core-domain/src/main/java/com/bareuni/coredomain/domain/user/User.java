@@ -6,13 +6,16 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.bareuni.coredomain.global.BaseEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -60,4 +63,7 @@ public class User extends BaseEntity {
 	@ColumnDefault("'USER'")
 	@Column(nullable = false)
 	private RoleType role;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+	private UserImage userImage;
 }
