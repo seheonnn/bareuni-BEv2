@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.bareuni.coredomain.domain.user.entity.User;
+import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;

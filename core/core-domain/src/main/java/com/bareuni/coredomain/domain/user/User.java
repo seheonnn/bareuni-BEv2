@@ -1,11 +1,9 @@
-package com.bareuni.coredomain.domain.user.entity;
+package com.bareuni.coredomain.domain.user;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.bareuni.coredomain.domain.user.GenderType;
-import com.bareuni.coredomain.domain.user.RoleType;
 import com.bareuni.coredomain.global.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -31,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

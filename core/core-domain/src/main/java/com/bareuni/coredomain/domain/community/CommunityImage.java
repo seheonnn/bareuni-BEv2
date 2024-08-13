@@ -1,4 +1,4 @@
-package com.bareuni.coredomain.domain.community.entity;
+package com.bareuni.coredomain.domain.community;
 
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;

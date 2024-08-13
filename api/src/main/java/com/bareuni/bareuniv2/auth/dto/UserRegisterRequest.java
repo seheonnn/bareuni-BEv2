@@ -1,7 +1,7 @@
 package com.bareuni.bareuniv2.auth.dto;
 
 import com.bareuni.coredomain.domain.user.GenderType;
-import com.bareuni.coredomain.domain.user.entity.User;
+import com.bareuni.coredomain.domain.user.User;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package com.bareuni.bareuniv2.auth.dto;
 
-import com.bareuni.coredomain.domain.user.entity.User;
+import com.bareuni.coredomain.domain.user.User;
 
 import lombok.Builder;
 

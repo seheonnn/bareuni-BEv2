@@ -9,7 +9,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.bareuni.coredomain.domain.user.entity.User;
+import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
 import com.bareuni.coreinfrasecurity.jwt.exception.SecurityCustomException;
 import com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode;

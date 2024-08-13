@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bareuni.coredomain.domain.hospital.Hospital;
-import com.bareuni.coredomain.domain.user.entity.User;
+import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.BaseEntity;
 
 import jakarta.persistence.CascadeType;

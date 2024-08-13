@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.bareuniv2.auth.dto.UserRegisterRequest;
 import com.bareuni.bareuniv2.auth.dto.UserRegisterResponse;
-import com.bareuni.coredomain.domain.user.entity.User;
+import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
 import com.bareuni.coreinfrasecurity.jwt.dto.JwtDto;
 import com.bareuni.coreinfrasecurity.jwt.util.JwtUtil;
