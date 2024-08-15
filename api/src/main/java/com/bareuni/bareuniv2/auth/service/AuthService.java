@@ -36,7 +36,7 @@ public class AuthService {
 		User newUser = request.toEntity(encodedPw);
 
 		if (request.profileUrl() != null) {
-			UserImage userImage = userImageRepository.findUserImageByUrl(request.profileUrl())
+			final UserImage userImage = userImageRepository.findUserImageByUrl(request.profileUrl())
 				.orElseThrow(() -> new UserException(UserErrorCode.USER_ERROR));
 
 			newUser.setUserImage(userImage);
