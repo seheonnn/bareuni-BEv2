@@ -36,6 +36,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hospital")
 public class Hospital extends BaseEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
