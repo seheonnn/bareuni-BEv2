@@ -4,8 +4,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bareuni.bareuniv2.auth.dto.UserRegisterRequest;
-import com.bareuni.bareuniv2.auth.dto.UserRegisterResponse;
+import com.bareuni.bareuniv2.auth.dto.JoinUserRequest;
+import com.bareuni.bareuniv2.auth.dto.JoinUserResponse;
 import com.bareuni.bareuniv2.auth.exception.UserErrorCode;
 import com.bareuni.bareuniv2.auth.exception.UserException;
 import com.bareuni.coredomain.domain.user.User;
@@ -30,7 +30,7 @@ public class AuthService {
 
 	private final UserImageRepository userImageRepository;
 
-	public UserRegisterResponse register(UserRegisterRequest request) {
+	public JoinUserResponse join(JoinUserRequest request) {
 
 		String encodedPw = passwordEncoder.encode(request.password());
 		User newUser = request.toEntity(encodedPw);
@@ -41,7 +41,7 @@ public class AuthService {
 
 			newUser.setUserImage(userImage);
 		}
-		return UserRegisterResponse.from(userRepository.save(newUser));
+		return JoinUserResponse.from(userRepository.save(newUser));
 	}
 
 	public JwtDto reissueToken(String refreshToken) {

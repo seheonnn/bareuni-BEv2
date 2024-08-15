@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record UserRegisterRequest(
+public record JoinUserRequest(
 
 	@NotBlank(message = "[ERROR] 이메일 입력은 필수입니다.")
 	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "[ERROR] 이메일 형식에 맞지 않습니다.")
@@ -32,6 +32,9 @@ public record UserRegisterRequest(
 	@NotNull(message = "[ERROR] 나이 입력은 필수 입니다.")
 	Integer age,
 
+	@NotNull(message = "[ERROR] 교정여부 입력은 필수 입니다.")
+	boolean ortho,
+
 	String profileUrl
 ) {
 
@@ -43,6 +46,7 @@ public record UserRegisterRequest(
 			.phone(phone)
 			.gender(gender)
 			.age(age)
+			.ortho(ortho)
 			.build();
 	}
 }

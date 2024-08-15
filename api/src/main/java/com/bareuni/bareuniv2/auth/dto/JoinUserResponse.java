@@ -8,15 +8,15 @@ import com.bareuni.coredomain.domain.user.UserImage;
 import lombok.Builder;
 
 @Builder
-public record UserRegisterResponse(
+public record JoinUserResponse(
 	Long id,
 	String username,
 	String email,
 	String profileUrl
 ) {
 
-	public static UserRegisterResponse from(User user) {
-		return UserRegisterResponse.builder()
+	public static JoinUserResponse from(User user) {
+		return JoinUserResponse.builder()
 			.id(user.getId())
 			.username(user.getUsername())
 			.email(user.getEmail())

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bareuni.bareuniv2.auth.dto.UserRegisterRequest;
-import com.bareuni.bareuniv2.auth.dto.UserRegisterResponse;
+import com.bareuni.bareuniv2.auth.dto.JoinUserRequest;
+import com.bareuni.bareuniv2.auth.dto.JoinUserResponse;
 import com.bareuni.bareuniv2.auth.service.AuthService;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.ApiResponse;
@@ -28,8 +28,8 @@ public class AuthController {
 	private final AuthService authService;
 
 	@PostMapping("/join")
-	public ApiResponse<UserRegisterResponse> register(@Valid @RequestBody UserRegisterRequest request) {
-		return ApiResponse.onSuccess(authService.register(request));
+	public ApiResponse<JoinUserResponse> join(@Valid @RequestBody JoinUserRequest request) {
+		return ApiResponse.onSuccess(authService.join(request));
 	}
 
 	@GetMapping("/reissue")
