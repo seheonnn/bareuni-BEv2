@@ -66,4 +66,9 @@ public class User extends BaseEntity {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	private UserImage userImage;
+
+	public void setUserImage(UserImage userImage) {
+		this.userImage = userImage;
+		userImage.setUser(this);
+	}
 }

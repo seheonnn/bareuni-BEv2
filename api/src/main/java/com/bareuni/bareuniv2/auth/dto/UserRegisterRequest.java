@@ -30,7 +30,9 @@ public record UserRegisterRequest(
 	GenderType gender,
 
 	@NotNull(message = "[ERROR] 나이 입력은 필수 입니다.")
-	Integer age
+	Integer age,
+
+	String profileUrl
 ) {
 
 	public User toEntity(String encodedPw) {
