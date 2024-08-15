@@ -64,11 +64,13 @@ public class User extends BaseEntity {
 	@Column(nullable = false)
 	private RoleType role;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private UserImage userImage;
 
 	public void setUserImage(UserImage userImage) {
 		this.userImage = userImage;
-		userImage.setUser(this);
+		if (userImage != null) {
+			userImage.setUser(this);
+		}
 	}
 }
