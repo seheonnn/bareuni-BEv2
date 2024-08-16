@@ -37,4 +37,8 @@ public class UserImage {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

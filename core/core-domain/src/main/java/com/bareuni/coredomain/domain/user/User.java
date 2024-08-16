@@ -73,4 +73,18 @@ public class User extends BaseEntity {
 			userImage.setUser(this);
 		}
 	}
+
+	public void update(
+		String username,
+		String phone,
+		GenderType gender,
+		Integer age,
+		Boolean ortho
+	) {
+		this.username = username == null ? this.username : username;
+		this.phone = phone == null ? this.phone : phone;
+		this.gender = gender == null ? this.gender : gender;
+		this.age = age == null ? this.age : age;
+		this.ortho = ortho == null ? this.ortho : ortho;
+	}
 }
