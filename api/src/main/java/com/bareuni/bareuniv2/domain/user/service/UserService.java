@@ -11,6 +11,7 @@ import com.bareuni.bareuniv2.domain.user.dto.UpdateUserRequest;
 import com.bareuni.bareuniv2.domain.user.dto.UpdateUserResponse;
 import com.bareuni.bareuniv2.domain.user.dto.UploadProfileImageResponse;
 import com.bareuni.coredomain.domain.user.User;
+import com.bareuni.coredomain.domain.user.UserImage;
 import com.bareuni.coredomain.domain.user.repository.UserImageRepository;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
 import com.bareuni.coreinfras3.S3Service;
@@ -46,18 +47,19 @@ public class UserService {
 		);
 
 		if (request.profileUrl() != null) {
-			// 트랜잭션 문제 발생
-			Optional.ofNullable(user.getUserImage()).ifPresent(image -> s3Service.deleteFile(image.getUrl()));
-			user.setUserImage(userImageRepository.save(UserConverter.toUserImage(request.profileUrl())));
-
-			// UserImage userImage = userImageRepository.findUserImageByUser(user).orElseGet(() -> {
-			// 		UserImage newUserImage = UserConverter.toUserImage(request.profileUrl());
-			// 		return userImageRepository.save(newUserImage);
-			// 	}
-			// );
-			// userImage.setUrl(request.profileUrl());
-			// user.setUserImage(userImage);
+			// 트랜잭션 문제 발생 -> 페치 조인 이용하여 해결
+			Optional.ofNullable(user.getUserImage()).ifPresentOrElse(
+				userImage -> {
+					s3Service.deleteFile(userImage.getUrl());
+					userImage.setUrl(request.profileUrl());
+				},
+				() -> {
+					UserImage newUserImage = userImageRepository.save(UserConverter.toUserImage(request.profileUrl()));
+					user.setUserImage(newUserImage);
+				}
+			);
 		}
+
 		return UpdateUserResponse.from(userRepository.save(user));
 	}
 }
