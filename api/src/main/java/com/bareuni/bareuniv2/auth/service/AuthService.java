@@ -25,10 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthService {
 
 	private final UserRepository userRepository;
+	private final UserImageRepository userImageRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtUtil jwtUtil;
-
-	private final UserImageRepository userImageRepository;
 
 	public JoinUserResponse join(JoinUserRequest request) {
 

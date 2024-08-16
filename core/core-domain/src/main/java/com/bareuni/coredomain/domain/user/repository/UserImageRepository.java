@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.UserImage;
 
 public interface UserImageRepository extends JpaRepository<UserImage, Long> {
@@ -13,6 +12,4 @@ public interface UserImageRepository extends JpaRepository<UserImage, Long> {
 	Optional<UserImage> findUserImageByUrl(String url);
 
 	List<UserImage> findAllByUserIsNull();
-
-	Optional<UserImage> findUserImageByUser(User user);
 }

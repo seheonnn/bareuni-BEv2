@@ -1,10 +1,8 @@
-package com.bareuni.bareuniv2.batch;
+package com.bareuni.batchimage.service;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.coredomain.domain.user.UserImage;
@@ -13,23 +11,19 @@ import com.bareuni.coreinfras3.S3Service;
 
 import lombok.RequiredArgsConstructor;
 
-@Configuration
 @RequiredArgsConstructor
-@EnableScheduling
-public class SchedulerConfig {
+@Service
+public class UserImageCleanupService {
 
-	private final S3Service s3Service;
 	private final UserImageRepository userImageRepository;
+	private final S3Service s3Service;
 
 	@Transactional
-	@Scheduled(cron = "0 0 0 * * *")
-	public void deleteNullUserImage() {
-		// TODO 추후 모듈 분리
+	public void cleanupUnlinkedImages() {
 		List<UserImage> userImages = userImageRepository.findAllByUserIsNull();
 		userImages.forEach(userImage -> {
 			s3Service.deleteFile(userImage.getUrl());
 			userImageRepository.delete(userImage);
 		});
 	}
-
 }

@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: batch
+  profiles:
+    active: secret, db, s3
+
+batch:
+  jdbc:
+    initialize-schema: always
