@@ -58,6 +58,8 @@ public class UserService {
 					user.setUserImage(newUserImage);
 				}
 			);
+		} else {
+			user.setUserImage(null);
 		}
 
 		return UpdateUserResponse.from(userRepository.save(user));

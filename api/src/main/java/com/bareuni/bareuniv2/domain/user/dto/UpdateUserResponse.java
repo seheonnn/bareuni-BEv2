@@ -16,13 +16,14 @@ public record UpdateUserResponse(
 	String profileUrl
 ) {
 	public static UpdateUserResponse from(User user) {
+		String url = user.getUserImage() == null ? null : user.getUserImage().getUrl();
 		return UpdateUserResponse.builder()
 			.username(user.getUsername())
 			.phone(user.getPhone())
 			.gender(user.getGender())
 			.age(user.getAge())
 			.ortho(user.isOrtho())
-			.profileUrl(user.getUserImage().getUrl())
+			.profileUrl(url)
 			.build();
 	}
 }
