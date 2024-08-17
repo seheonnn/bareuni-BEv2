@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bareuni.bareuniv2.auth.annotation.UserResolver;
 import com.bareuni.bareuniv2.domain.user.dto.UpdateUserRequest;
 import com.bareuni.bareuniv2.domain.user.dto.UpdateUserResponse;
 import com.bareuni.bareuniv2.domain.user.dto.UploadProfileImageResponse;
 import com.bareuni.bareuniv2.domain.user.service.UserService;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.ApiResponse;
-import com.bareuni.coreinfrasecurity.annotation.UserResolver;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bareuni.bareuniv2.auth.annotation.UserResolver;
 import com.bareuni.bareuniv2.auth.dto.JoinUserRequest;
 import com.bareuni.bareuniv2.auth.dto.JoinUserResponse;
+import com.bareuni.bareuniv2.auth.jwt.dto.JwtDto;
 import com.bareuni.bareuniv2.auth.service.AuthService;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.ApiResponse;
-import com.bareuni.coreinfrasecurity.annotation.UserResolver;
-import com.bareuni.coreinfrasecurity.jwt.dto.JwtDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

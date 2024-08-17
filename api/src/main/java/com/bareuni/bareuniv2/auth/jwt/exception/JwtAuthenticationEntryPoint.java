@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.exception;
+package com.bareuni.bareuniv2.auth.jwt.exception;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import com.bareuni.bareuniv2.auth.jwt.util.HttpResponseUtil;
 import com.bareuni.coredomain.global.ApiResponse;
-import com.bareuni.coreinfrasecurity.jwt.util.HttpResponseUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

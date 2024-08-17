@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.userdetails;
+package com.bareuni.bareuniv2.auth.jwt.userdetails;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.util;
+package com.bareuni.bareuniv2.auth.jwt.util;
 
 import java.io.IOException;
 

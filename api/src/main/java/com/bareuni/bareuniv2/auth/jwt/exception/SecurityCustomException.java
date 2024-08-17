@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.exception;
+package com.bareuni.bareuniv2.auth.jwt.exception;
 
 import com.bareuni.coredomain.global.BaseErrorCode;
 

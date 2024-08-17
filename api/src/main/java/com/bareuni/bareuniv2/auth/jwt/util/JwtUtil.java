@@ -1,6 +1,6 @@
-package com.bareuni.coreinfrasecurity.jwt.util;
+package com.bareuni.bareuniv2.auth.jwt.util;
 
-import static com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode.*;
+import static com.bareuni.bareuniv2.auth.jwt.exception.SecurityErrorCode.*;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -13,10 +13,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.bareuni.bareuniv2.auth.jwt.dto.JwtDto;
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityCustomException;
+import com.bareuni.bareuniv2.auth.jwt.userdetails.CustomUserDetails;
 import com.bareuni.coreinfraredis.util.RedisUtil;
-import com.bareuni.coreinfrasecurity.jwt.dto.JwtDto;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityCustomException;
-import com.bareuni.coreinfrasecurity.jwt.userdetails.CustomUserDetails;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

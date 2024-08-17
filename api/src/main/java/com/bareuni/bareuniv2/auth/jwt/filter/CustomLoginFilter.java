@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.filter;
+package com.bareuni.bareuniv2.auth.jwt.filter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,12 +16,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.bareuni.bareuniv2.auth.jwt.dto.JwtDto;
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityErrorCode;
+import com.bareuni.bareuniv2.auth.jwt.userdetails.CustomUserDetails;
+import com.bareuni.bareuniv2.auth.jwt.util.HttpResponseUtil;
+import com.bareuni.bareuniv2.auth.jwt.util.JwtUtil;
 import com.bareuni.coredomain.global.ApiResponse;
-import com.bareuni.coreinfrasecurity.jwt.dto.JwtDto;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode;
-import com.bareuni.coreinfrasecurity.jwt.userdetails.CustomUserDetails;
-import com.bareuni.coreinfrasecurity.jwt.util.HttpResponseUtil;
-import com.bareuni.coreinfrasecurity.jwt.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.FilterChain;

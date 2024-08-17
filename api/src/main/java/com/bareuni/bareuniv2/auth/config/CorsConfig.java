@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.config;
+package com.bareuni.bareuniv2.auth.config;
 
 import java.util.ArrayList;
 

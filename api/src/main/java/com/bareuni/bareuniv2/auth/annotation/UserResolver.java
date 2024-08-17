@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.annotation;
+package com.bareuni.bareuniv2.auth.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

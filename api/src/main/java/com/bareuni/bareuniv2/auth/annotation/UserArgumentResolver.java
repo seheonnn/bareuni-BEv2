@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.annotation;
+package com.bareuni.bareuniv2.auth.annotation;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,11 +9,11 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityCustomException;
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityErrorCode;
+import com.bareuni.bareuniv2.auth.jwt.userdetails.CustomUserDetails;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityCustomException;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode;
-import com.bareuni.coreinfrasecurity.jwt.userdetails.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

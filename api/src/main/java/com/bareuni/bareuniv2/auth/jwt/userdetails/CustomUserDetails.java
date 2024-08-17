@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.userdetails;
+package com.bareuni.bareuniv2.auth.jwt.userdetails;
 
 import java.util.ArrayList;
 import java.util.Collection;

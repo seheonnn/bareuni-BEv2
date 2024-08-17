@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.config;
+package com.bareuni.bareuniv2.auth.config;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -20,15 +20,15 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 
+import com.bareuni.bareuniv2.auth.jwt.exception.JwtAccessDeniedHandler;
+import com.bareuni.bareuniv2.auth.jwt.exception.JwtAuthenticationEntryPoint;
+import com.bareuni.bareuniv2.auth.jwt.filter.CustomLoginFilter;
+import com.bareuni.bareuniv2.auth.jwt.filter.CustomLogoutHandler;
+import com.bareuni.bareuniv2.auth.jwt.filter.JwtAuthenticationFilter;
+import com.bareuni.bareuniv2.auth.jwt.filter.JwtExceptionFilter;
+import com.bareuni.bareuniv2.auth.jwt.util.HttpResponseUtil;
+import com.bareuni.bareuniv2.auth.jwt.util.JwtUtil;
 import com.bareuni.coreinfraredis.util.RedisUtil;
-import com.bareuni.coreinfrasecurity.jwt.exception.JwtAccessDeniedHandler;
-import com.bareuni.coreinfrasecurity.jwt.exception.JwtAuthenticationEntryPoint;
-import com.bareuni.coreinfrasecurity.jwt.filter.CustomLoginFilter;
-import com.bareuni.coreinfrasecurity.jwt.filter.CustomLogoutHandler;
-import com.bareuni.coreinfrasecurity.jwt.filter.JwtAuthenticationFilter;
-import com.bareuni.coreinfrasecurity.jwt.filter.JwtExceptionFilter;
-import com.bareuni.coreinfrasecurity.jwt.util.HttpResponseUtil;
-import com.bareuni.coreinfrasecurity.jwt.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

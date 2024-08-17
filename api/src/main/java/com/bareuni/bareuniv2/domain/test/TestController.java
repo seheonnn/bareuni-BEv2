@@ -4,10 +4,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bareuni.bareuniv2.auth.annotation.UserResolver;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
 import com.bareuni.coredomain.global.ApiResponse;
-import com.bareuni.coreinfrasecurity.annotation.UserResolver;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,5 +26,10 @@ public class TestController {
 		user.setUserImage(null);
 		userRepository.save(user);
 		return ApiResponse.onSuccess(user);
+	}
+
+	@GetMapping("/test-user-resolver")
+	public ApiResponse<String> testUserResolver(@UserResolver User user) {
+		return ApiResponse.onSuccess(user.getEmail());
 	}
 }

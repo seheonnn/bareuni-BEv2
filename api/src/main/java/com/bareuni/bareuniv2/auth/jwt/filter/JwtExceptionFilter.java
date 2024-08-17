@@ -1,15 +1,15 @@
-package com.bareuni.coreinfrasecurity.jwt.filter;
+package com.bareuni.bareuniv2.auth.jwt.filter;
 
 import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityCustomException;
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityErrorCode;
+import com.bareuni.bareuniv2.auth.jwt.util.HttpResponseUtil;
 import com.bareuni.coredomain.global.ApiResponse;
 import com.bareuni.coredomain.global.BaseErrorCode;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityCustomException;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode;
-import com.bareuni.coreinfrasecurity.jwt.util.HttpResponseUtil;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;

@@ -3,7 +3,6 @@ dependencies {
     implementation project(':core:core-domain')
     implementation project(':core:core-infra-db')
     implementation project(':core:core-infra-redis')
-    implementation project(':core:core-infra-security')
     implementation project(':core:core-infra-s3')
     runtimeOnly project(':support:monitoring')
 
@@ -14,6 +13,11 @@ dependencies {
     // Validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     testImplementation 'org.projectlombok:lombok:1.18.22'
+
+    // Jwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
 }
 bootJar { enabled = true }
 jar { enabled = false }

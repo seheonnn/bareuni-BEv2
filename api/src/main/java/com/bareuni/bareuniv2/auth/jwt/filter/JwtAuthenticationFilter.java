@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.filter;
+package com.bareuni.bareuniv2.auth.jwt.filter;
 
 import java.io.IOException;
 
@@ -8,11 +8,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityCustomException;
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityErrorCode;
+import com.bareuni.bareuniv2.auth.jwt.userdetails.CustomUserDetails;
+import com.bareuni.bareuniv2.auth.jwt.util.JwtUtil;
 import com.bareuni.coreinfraredis.util.RedisUtil;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityCustomException;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode;
-import com.bareuni.coreinfrasecurity.jwt.userdetails.CustomUserDetails;
-import com.bareuni.coreinfrasecurity.jwt.util.JwtUtil;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;

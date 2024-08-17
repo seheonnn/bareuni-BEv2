@@ -11,11 +11,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityCustomException;
+import com.bareuni.bareuniv2.auth.jwt.exception.SecurityErrorCode;
 import com.bareuni.coredomain.global.ApiResponse;
 import com.bareuni.coredomain.global.BaseErrorCode;
 import com.bareuni.coredomain.global.GlobalErrorCode;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityCustomException;
-import com.bareuni.coreinfrasecurity.jwt.exception.SecurityErrorCode;
 
 import lombok.extern.slf4j.Slf4j;
 

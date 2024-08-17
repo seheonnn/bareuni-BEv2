@@ -1,4 +1,4 @@
-package com.bareuni.coreinfrasecurity.jwt.exception;
+package com.bareuni.bareuniv2.auth.jwt.exception;
 
 import org.springframework.http.HttpStatus;
 
