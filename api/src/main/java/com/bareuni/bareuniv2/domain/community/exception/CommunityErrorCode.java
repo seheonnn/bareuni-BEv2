@@ -1,4 +1,4 @@
-package com.bareuni.bareuniv2.auth.exception;
+package com.bareuni.bareuniv2.domain.community.exception;
 
 import org.springframework.http.HttpStatus;
 
@@ -10,10 +10,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserErrorCode implements BaseErrorCode {
+public enum CommunityErrorCode implements BaseErrorCode {
 
-	USER_ERROR(HttpStatus.BAD_REQUEST, "USR4000", "사용자 관련 에러"),
-	USER_IMAGE_ERROR(HttpStatus.NOT_FOUND, "USR4040", "사용자 이미지 에러"),
+	COMMUNITY_ERROR(HttpStatus.BAD_REQUEST, "COMMU4000", "커뮤니티 관련 에러"),
+	COMMUNITY_IMAGE_ERROR(HttpStatus.NOT_FOUND, "COMMU4040", "커뮤니티 이미지 에러"),
 	;
 	private final HttpStatus httpStatus;
 	private final String code;

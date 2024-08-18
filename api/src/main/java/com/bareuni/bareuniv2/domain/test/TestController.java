@@ -30,6 +30,7 @@ public class TestController {
 
 	@GetMapping("/test-user-resolver")
 	public ApiResponse<String> testUserResolver(@UserResolver User user) {
+		log.info(user.getUserImage().getUrl());
 		return ApiResponse.onSuccess(user.getEmail());
 	}
 }

@@ -39,15 +39,6 @@ public class Review extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-	private User user;
-
-	@Builder.Default
-	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-	private List<ReviewImage> reviewImages = new ArrayList<>();
-
 	// 별점
 	@Column(nullable = false)
 	private int totalScore;
@@ -75,4 +66,12 @@ public class Review extends BaseEntity {
 
 	@Column(nullable = false)
 	private boolean receipt;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+	private User user;
+
+	@Builder.Default
+	@OneToMany(mappedBy = "review", cascade = {CascadeType.ALL}, orphanRemoval = true)
+	private List<ReviewImage> reviewImages = new ArrayList<>();
 }

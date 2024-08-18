@@ -46,12 +46,22 @@ public class Community extends BaseEntity {
 	private User user;
 
 	@Builder.Default
-	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "community_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+	@OneToMany(mappedBy = "community", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private List<CommunityImage> communityImages = new ArrayList<>();
 
 	@Builder.Default
 	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "community_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<Comment> comments = new ArrayList<>();
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void addCommunityImage(CommunityImage communityImage) {
+		if (this.communityImages == null) {
+			this.communityImages = new ArrayList<>();
+		}
+		this.communityImages.add(communityImage);
+		communityImage.setCommunity(this);
+	}
 }

@@ -8,5 +8,7 @@ import com.bareuni.coredomain.domain.community.CommunityImage;
 
 public interface CommunityImageRepository extends JpaRepository<CommunityImage, Long> {
 
+	List<CommunityImage> findAllByUrlInAndCommunityIsNull(List<String> urls);
+
 	List<CommunityImage> findAllByCommunityIsNull();
 }

@@ -35,4 +35,8 @@ public class CommunityImage {
 	private String url;
 
 	private int imageOrder;
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
 }

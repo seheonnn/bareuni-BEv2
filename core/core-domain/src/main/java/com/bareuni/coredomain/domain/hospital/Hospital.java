@@ -12,13 +12,10 @@ import com.bareuni.coredomain.global.BaseEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -73,12 +70,9 @@ public class Hospital extends BaseEntity {
 
 	@Builder.Default
 	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private List<Review> reviews = new ArrayList<>();
 
 	@Builder.Default
-	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	@JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+	@OneToMany(mappedBy = "hospital", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private List<HospitalImage> hospitalImages = new ArrayList<>();
-
 }
