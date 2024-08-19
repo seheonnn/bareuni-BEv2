@@ -66,9 +66,10 @@ public class CommunityService {
 	}
 
 	public UpdateCommunityResponse updateCommunity(Long id, User user, UpdateCommunityRequest request) {
-		Community community = communityRepository.findById(id)
+		log.info("*****************");
+		Community community = communityRepository.findByIdWithUser(id)
 			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
-
+		log.info("*****************");
 		if (!community.getUser().getId().equals(user.getId()))
 			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
 
