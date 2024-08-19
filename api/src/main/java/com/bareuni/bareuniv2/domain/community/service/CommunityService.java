@@ -22,7 +22,9 @@ import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coreinfras3.S3Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 @Service
@@ -66,6 +68,10 @@ public class CommunityService {
 	public UpdateCommunityResponse updateCommunity(Long id, User user, UpdateCommunityRequest request) {
 		Community community = communityRepository.findById(id)
 			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
+
+		if (community.getUser().getId() != user.getId())
+			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
+
 		community.update(request.content());
 
 		List<String> imageUrls = request.imageUrls();
