@@ -60,7 +60,7 @@ public class CommunityService {
 			communityImages.forEach(community::addCommunityImage);
 		}
 
-		communityRepository.save(community); // Community와 CommunityImage들을 함께 저장
+		communityRepository.save(community);
 
 		return CreateCommunityResponse.from(community);
 	}
@@ -69,7 +69,7 @@ public class CommunityService {
 		Community community = communityRepository.findById(id)
 			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
 
-		if (community.getUser().getId() != user.getId())
+		if (!community.getUser().getId().equals(user.getId()))
 			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
 
 		community.update(request.content());
