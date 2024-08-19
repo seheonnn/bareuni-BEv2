@@ -13,7 +13,8 @@ import lombok.Getter;
 public enum CommunityErrorCode implements BaseErrorCode {
 
 	COMMUNITY_ERROR(HttpStatus.BAD_REQUEST, "COMMU4000", "커뮤니티 관련 에러"),
-	COMMUNITY_IMAGE_ERROR(HttpStatus.NOT_FOUND, "COMMU4040", "커뮤니티 이미지 에러"),
+	COMMUNITY_IMAGE_ERROR(HttpStatus.BAD_REQUEST, "COMMU4001", "커뮤니티 이미지 에러"),
+	COMMUNITY_NOT_FOUND(HttpStatus.NOT_FOUND, "COMMU4040", "해당 커뮤니티를 찾을 수 없습니다."),
 	;
 	private final HttpStatus httpStatus;
 	private final String code;

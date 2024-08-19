@@ -13,7 +13,7 @@ import lombok.Getter;
 public enum UserErrorCode implements BaseErrorCode {
 
 	USER_ERROR(HttpStatus.BAD_REQUEST, "USR4000", "사용자 관련 에러"),
-	USER_IMAGE_ERROR(HttpStatus.NOT_FOUND, "USR4040", "사용자 이미지 에러"),
+	USER_IMAGE_ERROR(HttpStatus.BAD_REQUEST, "USR4001", "사용자 이미지 에러"),
 	;
 	private final HttpStatus httpStatus;
 	private final String code;

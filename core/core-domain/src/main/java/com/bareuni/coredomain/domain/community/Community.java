@@ -64,4 +64,8 @@ public class Community extends BaseEntity {
 		this.communityImages.add(communityImage);
 		communityImage.setCommunity(this);
 	}
+
+	public void update(String content) {
+		this.content = content == null ? this.content : content;
+	}
 }

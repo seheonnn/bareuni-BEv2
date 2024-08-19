@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bareuni.bareuniv2.domain.community.converter.CommunityImageConverter;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityException;
@@ -59,5 +61,36 @@ public class CommunityService {
 		communityRepository.save(community); // Community와 CommunityImage들을 함께 저장
 
 		return CreateCommunityResponse.from(community);
+	}
+
+	public UpdateCommunityResponse updateCommunity(Long id, User user, UpdateCommunityRequest request) {
+		Community community = communityRepository.findById(id)
+			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
+		community.update(request.content());
+
+		List<String> imageUrls = request.imageUrls();
+		if (imageUrls != null && !imageUrls.isEmpty()) {
+
+			// 기존 이미지 연관관계 삭제 후
+			community.getCommunityImages().forEach(
+				image -> {
+					s3Service.deleteFile(image.getUrl());
+					image.setCommunity(null);
+				}
+			);
+			community.getCommunityImages().clear();
+
+			// 새로운 이미지들로 구성
+			List<CommunityImage> communityImages = communityImageRepository.findAllByUrlInAndCommunityIsNull(imageUrls);
+			List<String> foundUrls = communityImages.stream()
+				.map(CommunityImage::getUrl)
+				.toList();
+
+			if (!foundUrls.containsAll(imageUrls)) {
+				throw new CommunityException(CommunityErrorCode.COMMUNITY_IMAGE_ERROR);
+			}
+			communityImages.forEach(community::addCommunityImage);
+		}
+		return UpdateCommunityResponse.from(community);
 	}
 }

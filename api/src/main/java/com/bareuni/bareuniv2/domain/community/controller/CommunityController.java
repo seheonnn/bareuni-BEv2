@@ -1,5 +1,6 @@
 package com.bareuni.bareuniv2.domain.community.controller;
 
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bareuni.bareuniv2.auth.annotation.UserResolver;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
 import com.bareuni.bareuniv2.domain.community.service.CommunityService;
 import com.bareuni.coredomain.domain.user.User;
@@ -39,5 +42,14 @@ public class CommunityController {
 		@RequestBody @Valid CreateCommunityRequest request
 	) {
 		return ApiResponse.onSuccess(communityService.createCommunity(user, request));
+	}
+
+	@PatchMapping("/update/{id}")
+	public ApiResponse<UpdateCommunityResponse> updateCommunity(
+		@UserResolver User user,
+		@PathVariable Long id,
+		@RequestBody UpdateCommunityRequest request
+	) {
+		return ApiResponse.onSuccess(communityService.updateCommunity(id, user, request));
 	}
 }
