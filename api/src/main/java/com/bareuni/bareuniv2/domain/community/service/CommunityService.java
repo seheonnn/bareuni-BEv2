@@ -77,6 +77,7 @@ public class CommunityService {
 			.url(url)
 			.build();
 
+		community.addCommunityImage(communityImage);
 		communityRepository.save(community);
 
 		return CreateCommunityResponse.from(community);
@@ -88,7 +89,7 @@ public class CommunityService {
 		if (!community.getUser().getId().equals(user.getId()))
 			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
 
-		community.update(request.content());
+		community.update(request.title(), request.content());
 
 		List<String> imageUrls = request.imageUrls();
 		if (imageUrls != null && !imageUrls.isEmpty()) {

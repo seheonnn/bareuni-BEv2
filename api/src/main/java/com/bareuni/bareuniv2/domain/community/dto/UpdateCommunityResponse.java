@@ -10,6 +10,7 @@ import lombok.Builder;
 @Builder
 public record UpdateCommunityResponse(
 	Long id,
+	String title,
 	String content,
 	List<String> imageUrls
 ) {
@@ -20,6 +21,7 @@ public record UpdateCommunityResponse(
 
 		return UpdateCommunityResponse.builder()
 			.id(community.getId())
+			.title(community.getTile())
 			.content(community.getContent())
 			.imageUrls(imageUrls)
 			.build();

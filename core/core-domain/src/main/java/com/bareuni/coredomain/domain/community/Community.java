@@ -41,6 +41,9 @@ public class Community extends BaseEntity {
 	private Long id;
 
 	@Column(nullable = false)
+	private String tile;
+
+	@Column(nullable = false)
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -69,7 +72,8 @@ public class Community extends BaseEntity {
 		communityImage.setCommunity(this);
 	}
 
-	public void update(String content) {
+	public void update(String tile, String content) {
+		this.tile = tile == null ? this.tile : tile;
 		this.content = content == null ? this.content : content;
 	}
 }
