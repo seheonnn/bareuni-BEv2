@@ -29,7 +29,7 @@ public class CommunityController {
 
 	private final CommunityService communityService;
 
-	@PostMapping("/upload-image/{order}")
+	@PostMapping(value = "/upload-image/{order}", consumes = "multipart/form-data")
 	public ApiResponse<UploadCommunityImageResponse> uploadCommunityImage(
 		@PathVariable int order,
 		@RequestPart(name = "file") MultipartFile file) {
@@ -42,6 +42,15 @@ public class CommunityController {
 		@RequestBody @Valid CreateCommunityRequest request
 	) {
 		return ApiResponse.onSuccess(communityService.createCommunity(user, request));
+	}
+
+	@PostMapping(value = "/create-origin", consumes = "multipart/form-data")
+	public ApiResponse<CreateCommunityResponse> createCommunityOrigin(
+		@UserResolver User user,
+		@RequestPart MultipartFile image,
+		@RequestPart @Valid CreateCommunityRequest request
+	) {
+		return ApiResponse.onSuccess(communityService.createCommunityOrigin(user, image, request));
 	}
 
 	@PatchMapping("/update/{id}")

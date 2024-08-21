@@ -26,7 +26,7 @@ public class UserController {
 
 	private final UserService userService;
 
-	@PostMapping("/upload-profile")
+	@PostMapping(value = "/upload-profile", consumes = "multipart/form-data")
 	public ApiResponse<UploadProfileImageResponse> uploadProfileImage(
 		@RequestPart(name = "file") MultipartFile file) {
 		return ApiResponse.onSuccess(userService.uploadProfileImage(file));

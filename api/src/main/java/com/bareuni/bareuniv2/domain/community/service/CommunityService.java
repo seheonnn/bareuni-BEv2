@@ -65,11 +65,26 @@ public class CommunityService {
 		return CreateCommunityResponse.from(community);
 	}
 
+	public CreateCommunityResponse createCommunityOrigin(User user, MultipartFile image,
+		CreateCommunityRequest request) {
+		Community community = request.toEntity();
+		community.setUser(user);
+
+		String url = s3Service.uploadImage(image);
+		CommunityImage communityImage = CommunityImage.builder()
+			.community(community)
+			.imageOrder(1)
+			.url(url)
+			.build();
+
+		communityRepository.save(community);
+
+		return CreateCommunityResponse.from(community);
+	}
+
 	public UpdateCommunityResponse updateCommunity(Long id, User user, UpdateCommunityRequest request) {
-		log.info("*****************");
 		Community community = communityRepository.findByIdWithUser(id)
 			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
-		log.info("*****************");
 		if (!community.getUser().getId().equals(user.getId()))
 			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
 
