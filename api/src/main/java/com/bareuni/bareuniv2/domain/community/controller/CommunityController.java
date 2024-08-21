@@ -1,5 +1,6 @@
 package com.bareuni.bareuniv2.domain.community.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,13 @@ public class CommunityController {
 		@RequestBody UpdateCommunityRequest request
 	) {
 		return ApiResponse.onSuccess(communityService.updateCommunity(id, user, request));
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public ApiResponse<String> deleteCommunity(
+		@UserResolver User user,
+		@PathVariable Long id
+	) {
+		return ApiResponse.onSuccess(communityService.deleteCommunity(id, user));
 	}
 }

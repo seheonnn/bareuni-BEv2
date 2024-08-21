@@ -115,4 +115,15 @@ public class CommunityService {
 		}
 		return UpdateCommunityResponse.from(community);
 	}
+
+	public String deleteCommunity(Long id, User user) {
+		Community community = communityRepository.findByIdWithUser(id)
+			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
+		if (!community.getUser().getId().equals(user.getId()))
+			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
+
+		communityRepository.delete(community);
+
+		return "삭제 성공";
+	}
 }
