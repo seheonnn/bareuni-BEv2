@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.bareuni.coredomain.domain.community.Community;
 
-public interface CommunityRepository extends JpaRepository<Community, Long> {
+public interface CommunityRepository extends JpaRepository<Community, Long>, CommunityCustomRepository {
 
 	@Query("SELECT c FROM Community c JOIN FETCH c.user WHERE c.id = :id")
 	Optional<Community> findByIdWithUser(Long id);
