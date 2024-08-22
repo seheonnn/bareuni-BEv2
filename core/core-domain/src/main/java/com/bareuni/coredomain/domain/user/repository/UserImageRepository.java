@@ -9,7 +9,7 @@ import com.bareuni.coredomain.domain.user.UserImage;
 
 public interface UserImageRepository extends JpaRepository<UserImage, Long> {
 
-	Optional<UserImage> findUserImageByUrl(String url);
+	Optional<UserImage> findUserImageByUrlAndUserIsNull(String url);
 
 	List<UserImage> findAllByUserIsNull();
 }

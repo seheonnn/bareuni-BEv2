@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bareuni.bareuniv2.auth.exception.UserErrorCode;
+import com.bareuni.bareuniv2.auth.exception.UserException;
 import com.bareuni.bareuniv2.domain.user.converter.UserConverter;
 import com.bareuni.bareuniv2.domain.user.dto.UpdateUserRequest;
 import com.bareuni.bareuniv2.domain.user.dto.UpdateUserResponse;
@@ -54,8 +56,10 @@ public class UserService {
 					userImage.setUrl(request.profileUrl());
 				},
 				() -> {
-					UserImage newUserImage = userImageRepository.save(UserConverter.toUserImage(request.profileUrl()));
-					user.setUserImage(newUserImage);
+					final UserImage userImage = userImageRepository.findUserImageByUrlAndUserIsNull(
+							request.profileUrl())
+						.orElseThrow(() -> new UserException(UserErrorCode.USER_ERROR));
+					user.setUserImage(userImage);
 				}
 			);
 		} else {
