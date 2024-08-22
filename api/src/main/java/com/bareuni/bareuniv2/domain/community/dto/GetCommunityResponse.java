@@ -2,9 +2,9 @@ package com.bareuni.bareuniv2.domain.community.dto;
 
 import java.util.List;
 
+import com.bareuni.bareuniv2.domain.user.dto.UserSummary;
 import com.bareuni.coredomain.domain.community.Community;
 import com.bareuni.coredomain.domain.community.CommunityImage;
-import com.bareuni.coredomain.domain.user.User;
 
 import lombok.Builder;
 
@@ -13,7 +13,7 @@ public record GetCommunityResponse(
 
 	Long id,
 	String content,
-	User user,
+	UserSummary user,
 	List<String> imageUrls
 ) {
 	public static GetCommunityResponse from(Community community) {
@@ -24,7 +24,7 @@ public record GetCommunityResponse(
 		return GetCommunityResponse.builder()
 			.id(community.getId())
 			.content(community.getContent())
-			.user(community.getUser())
+			.user(UserSummary.from(community.getUser()))
 			.imageUrls(imageUrls)
 			.build();
 	}
