@@ -15,7 +15,6 @@ import com.bareuni.bareuniv2.domain.page.PageCondition;
 import com.bareuni.bareuniv2.domain.page.PageResponse;
 import com.bareuni.coredomain.domain.community.Community;
 import com.bareuni.coredomain.domain.community.CommunityImage;
-import com.bareuni.coredomain.domain.community.repository.CommunityImageRepository;
 import com.bareuni.coredomain.domain.community.repository.CommunityRepository;
 import com.bareuni.coredomain.domain.user.GenderType;
 import com.bareuni.coredomain.domain.user.RoleType;
@@ -31,20 +30,20 @@ class CommunityServiceTest {
 	@Autowired
 	EntityManager em;
 	@Autowired
-	CommunityRepository communityRepository;
-	@Autowired
-	CommunityImageRepository communityImageRepository;
-	@Autowired
 	CommunityService communityService;
 	@Autowired
 	CommunityQueryService communityQueryService;
+	@Autowired
+	CommunityRepository communityRepository;
+
+	private User user;
 
 	@BeforeEach
 	void setUp() {
 
-		User user = User.builder()
+		user = User.builder()
 			.email("test@example.com")
-			.username("testuser")
+			.username("testUser")
 			.password("password")
 			.gender(GenderType.MALE)
 			.age(30)
@@ -92,5 +91,22 @@ class CommunityServiceTest {
 		// then
 		Assertions.assertNotNull(communities, "결과가 null이 아님을 확인합니다.");
 		Assertions.assertEquals(10, communities.pageSize(), "페이지당 커뮤니티 개수가 10개인지 확인합니다.");
+	}
+
+	@Test
+	@DisplayName("커뮤니티 업데이트 테스트")
+	public void updateCommunityTest() {
+		// given
+		Community community = Community.builder()
+			.tile("커뮤니티 제목")
+			.content("커뮤니티 내용")
+			.user(user)
+			.build();
+
+		// when
+		community.update("커뮤니티 수정 테스트", null);
+
+		//then
+		Assertions.assertEquals(community.getTile(), "커뮤니티 수정 테스트");
 	}
 }
