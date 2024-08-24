@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.service.CommunityQueryService;
 import com.bareuni.bareuniv2.domain.community.service.CommunityService;
@@ -76,6 +77,20 @@ class CommunityServiceTest {
 			}
 			em.persist(community);
 		}
+	}
+
+	@Test
+	@DisplayName("커뮤니티 생성 테스트")
+	public void createCommunity() {
+		// given
+		CreateCommunityRequest request = new CreateCommunityRequest("커뮤니티 생성 테스트", "커뮤니티 생성 테스트", null);
+
+		// when
+		Long id = communityService.createCommunity(user, request).id();
+
+		//then
+		Community savedCommunity = communityRepository.findByIdWithUser(id).orElseThrow();
+		Assertions.assertEquals(request.title(), savedCommunity.getTile());
 	}
 
 	@Test
