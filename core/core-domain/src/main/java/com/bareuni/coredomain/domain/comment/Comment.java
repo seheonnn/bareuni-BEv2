@@ -1,5 +1,6 @@
 package com.bareuni.coredomain.domain.comment;
 
+import com.bareuni.coredomain.domain.community.Community;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.BaseEntity;
 
@@ -32,10 +33,22 @@ public class Comment extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "content", nullable = false)
+	private String content;
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private User user;
 
-	@Column(name = "content", nullable = false)
-	private String content;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "community_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+	private Community community;
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
 }

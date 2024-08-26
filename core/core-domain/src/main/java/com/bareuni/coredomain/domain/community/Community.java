@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.annotations.BatchSize;
 
-import com.bareuni.coredomain.domain.comment.Comment;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.global.BaseEntity;
 
@@ -54,11 +53,6 @@ public class Community extends BaseEntity {
 	@BatchSize(size = 1000)
 	@OneToMany(mappedBy = "community", cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private List<CommunityImage> communityImages = new ArrayList<>();
-
-	@Builder.Default
-	@BatchSize(size = 1000)
-	@OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-	private List<Comment> comments = new ArrayList<>();
 
 	public void setUser(User user) {
 		this.user = user;

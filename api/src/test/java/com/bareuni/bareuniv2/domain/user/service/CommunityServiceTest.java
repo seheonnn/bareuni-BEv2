@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
+import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
@@ -39,7 +41,6 @@ class CommunityServiceTest {
 	CommunityQueryService communityQueryService;
 	@Autowired
 	CommunityRepository communityRepository;
-
 	private User user;
 
 	@BeforeEach
@@ -141,5 +142,24 @@ class CommunityServiceTest {
 
 		// then
 		Assertions.assertEquals(CommunityErrorCode.COMMUNITY_NOT_FOUND, exception.getErrorCode());
+	}
+
+	@Test
+	@DisplayName("댓글 생성 테스트")
+	void createCommentTest() {
+		// given
+		Community community = Community.builder()
+			.tile("커뮤니티 제목")
+			.content("커뮤니티 내용")
+			.user(user)
+			.build();
+
+		CreateCommentRequest request = new CreateCommentRequest("댓글 생성 테스트");
+
+		// when
+		CreateCommentResponse savedComment = communityService.createComment(1L, user, request);
+
+		//then
+		Assertions.assertEquals("댓글 생성 테스트", savedComment.content());
 	}
 }

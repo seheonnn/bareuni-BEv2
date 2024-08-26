@@ -21,7 +21,6 @@ public record CreateCommunityRequest(
 			.content(content)
 			.user(null)
 			.communityImages(new ArrayList<>())
-			.comments(new ArrayList<>())
 			.build();
 	}
 }
