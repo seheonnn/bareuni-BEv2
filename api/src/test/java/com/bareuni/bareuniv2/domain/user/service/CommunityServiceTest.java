@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
+import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
+import com.bareuni.bareuniv2.domain.community.exception.CommunityException;
 import com.bareuni.bareuniv2.domain.community.service.CommunityQueryService;
 import com.bareuni.bareuniv2.domain.community.service.CommunityService;
 import com.bareuni.bareuniv2.domain.page.PageCondition;
@@ -59,7 +62,27 @@ class CommunityServiceTest {
 		user.setUserImage(userImage);
 
 		em.persist(user);
+	}
 
+	@Test
+	@DisplayName("커뮤니티 생성 테스트")
+	void createCommunity() {
+		// given
+		CreateCommunityRequest request = new CreateCommunityRequest("커뮤니티 생성 테스트", "커뮤니티 생성 테스트", null);
+
+		// when
+		Long id = communityService.createCommunity(user, request).id();
+
+		//then
+		Community savedCommunity = communityRepository.findByIdWithUser(id).orElseThrow();
+		Assertions.assertEquals(request.title(), savedCommunity.getTile());
+	}
+
+	@Test
+	@DisplayName("커뮤니티 조회 테스트")
+	void getCommunitiesTest() {
+
+		// given
 		for (int i = 0; i < 50; i++) {
 
 			Community community = Community.builder()
@@ -77,27 +100,7 @@ class CommunityServiceTest {
 			}
 			em.persist(community);
 		}
-	}
 
-	@Test
-	@DisplayName("커뮤니티 생성 테스트")
-	public void createCommunity() {
-		// given
-		CreateCommunityRequest request = new CreateCommunityRequest("커뮤니티 생성 테스트", "커뮤니티 생성 테스트", null);
-
-		// when
-		Long id = communityService.createCommunity(user, request).id();
-
-		//then
-		Community savedCommunity = communityRepository.findByIdWithUser(id).orElseThrow();
-		Assertions.assertEquals(request.title(), savedCommunity.getTile());
-	}
-
-	@Test
-	@DisplayName("커뮤니티 조회 테스트")
-	void getCommunitiesTest() {
-
-		// given
 		PageCondition pageCondition = new PageCondition(1, 10); // 페이지 조건 설정
 
 		// when
@@ -110,7 +113,7 @@ class CommunityServiceTest {
 
 	@Test
 	@DisplayName("커뮤니티 업데이트 테스트")
-	public void updateCommunityTest() {
+	void updateCommunityTest() {
 		// given
 		Community community = Community.builder()
 			.tile("커뮤니티 제목")
@@ -122,6 +125,21 @@ class CommunityServiceTest {
 		community.update("커뮤니티 수정 테스트", null);
 
 		//then
-		Assertions.assertEquals(community.getTile(), "커뮤니티 수정 테스트");
+		Assertions.assertEquals("커뮤니티 수정 테스트", community.getTile());
+	}
+
+	@Test
+	@DisplayName("커뮤니티 업데이트 테스트")
+	void updateCommunityRedTest() {
+		// given
+		UpdateCommunityRequest updateCommunityRequest = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
+
+		// when
+		CommunityException exception = Assertions.assertThrows(CommunityException.class, () -> {
+			communityService.updateCommunity(112312321L, user, updateCommunityRequest);
+		});
+
+		// then
+		Assertions.assertEquals(CommunityErrorCode.COMMUNITY_NOT_FOUND, exception.getErrorCode());
 	}
 }
