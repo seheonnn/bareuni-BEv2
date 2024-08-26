@@ -129,8 +129,8 @@ class CommunityServiceTest {
 	}
 
 	@Test
-	@DisplayName("커뮤니티 업데이트 테스트")
-	void updateCommunityRedTest() {
+	@DisplayName("커뮤니티 업데이트 exception 테스트")
+	void updateCommunityExceptionTest() {
 		// given
 		UpdateCommunityRequest updateCommunityRequest = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
 
