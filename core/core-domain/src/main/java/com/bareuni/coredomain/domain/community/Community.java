@@ -65,9 +65,9 @@ public class Community extends BaseEntity {
 	}
 
 	public void addCommunityImage(CommunityImage communityImage) {
-		if (this.communityImages == null) {
-			this.communityImages = new ArrayList<>();
-		}
+		// if (this.communityImages == null) {
+		// 	this.communityImages = new ArrayList<>();
+		// }
 		this.communityImages.add(communityImage);
 		communityImage.setCommunity(this);
 	}
