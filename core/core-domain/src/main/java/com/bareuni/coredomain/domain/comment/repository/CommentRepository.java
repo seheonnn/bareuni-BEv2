@@ -1,8 +1,14 @@
 package com.bareuni.coredomain.domain.comment.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.bareuni.coredomain.domain.comment.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
+
+	@Query("SELECT c FROM Comment c JOIN FETCH c.user u JOIN FETCH c.community com WHERE c.id = :id")
+	Optional<Comment> findByIdWithUserAndCommunity(Long id);
 }

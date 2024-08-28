@@ -147,7 +147,7 @@ public class CommunityService {
 	}
 
 	public CreateCommentResponse updateComment(Long id, User user, UpdateCommentRequest request, Long commentId) {
-		Comment comment = commentRepository.findById(commentId)
+		Comment comment = commentRepository.findByIdWithUserAndCommunity(commentId)
 			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_COMMENT_NOT_FOUND));
 
 		if (!comment.getUser().getId().equals(user.getId()))
