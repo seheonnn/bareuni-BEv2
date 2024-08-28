@@ -44,6 +44,7 @@ class CommunityServiceTest {
 	@Autowired
 	CommunityRepository communityRepository;
 	private User user;
+	private Long communityId;
 
 	@BeforeEach
 	void setUp() {
@@ -65,6 +66,14 @@ class CommunityServiceTest {
 		user.setUserImage(userImage);
 
 		em.persist(user);
+
+		Community community = Community.builder()
+			.tile("커뮤니티 제목")
+			.content("커뮤니티 내용")
+			.user(user)
+			.build();
+		em.persist(community);
+		communityId = community.getId();
 	}
 
 	@Test
@@ -118,16 +127,13 @@ class CommunityServiceTest {
 	@DisplayName("커뮤니티 업데이트 테스트")
 	void updateCommunityTest() {
 		// given
-		Community community = Community.builder()
-			.tile("커뮤니티 제목")
-			.content("커뮤니티 내용")
-			.user(user)
-			.build();
+		Community community = communityRepository.findById(communityId).orElseThrow();
 
 		// when
-		community.update("커뮤니티 수정 테스트", null);
+		UpdateCommunityRequest request = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
+		communityService.updateCommunity(communityId, user, request);
 
-		//then
+		// then
 		Assertions.assertEquals("커뮤니티 수정 테스트", community.getTile());
 	}
 
@@ -135,33 +141,33 @@ class CommunityServiceTest {
 	@DisplayName("커뮤니티 업데이트 exception 테스트")
 	void updateCommunityExceptionTest() {
 		// given
-		UpdateCommunityRequest updateCommunityRequest = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
+		User newUser = User.builder()
+			.email("test2@example.com")
+			.username("testUser2")
+			.password("password")
+			.gender(GenderType.MALE)
+			.age(30)
+			.role(RoleType.USER)
+			.build();
+		UpdateCommunityRequest request = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
 
 		// when
 		CommunityException exception = Assertions.assertThrows(CommunityException.class, () -> {
-			communityService.updateCommunity(112312321L, user, updateCommunityRequest);
+			communityService.updateCommunity(communityId, newUser, request);
 		});
 
 		// then
-		Assertions.assertEquals(CommunityErrorCode.COMMUNITY_NOT_FOUND, exception.getErrorCode());
+		Assertions.assertEquals(CommunityErrorCode.COMMUNITY_FORBIDDEN, exception.getErrorCode());
 	}
 
 	@Test
 	@DisplayName("댓글 생성 테스트")
 	void createCommentTest() {
 		// given
-		Community community = Community.builder()
-			.tile("커뮤니티 제목")
-			.content("커뮤니티 내용")
-			.user(user)
-			.build();
-
-		CreateCommunityRequest createCommunityRequest = new CreateCommunityRequest("커뮤니티 생성 테스트", "커뮤니티 생성 테스트", null);
-		communityService.createCommunity(user, createCommunityRequest).id();
 		CreateCommentRequest createCommentRequest = new CreateCommentRequest("댓글 생성 테스트");
 
 		// when
-		CreateCommentResponse savedComment = communityService.createComment(1L, user, createCommentRequest);
+		CreateCommentResponse savedComment = communityService.createComment(communityId, user, createCommentRequest);
 
 		//then
 		Assertions.assertEquals("댓글 생성 테스트", savedComment.content());
