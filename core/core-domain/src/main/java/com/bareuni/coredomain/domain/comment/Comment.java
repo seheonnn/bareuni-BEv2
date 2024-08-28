@@ -51,4 +51,8 @@ public class Comment extends BaseEntity {
 	public void setCommunity(Community community) {
 		this.community = community;
 	}
+
+	public void update(String content) {
+		this.content = content == null ? this.content : content;
+	}
 }

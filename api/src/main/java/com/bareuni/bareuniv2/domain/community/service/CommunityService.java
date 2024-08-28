@@ -11,6 +11,8 @@ import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
@@ -142,5 +144,19 @@ public class CommunityService {
 		comment.setCommunity(community);
 
 		return CreateCommentResponse.from(commentRepository.save(comment));
+	}
+
+	public CreateCommentResponse updateComment(Long id, User user, UpdateCommentRequest request, Long commentId) {
+		Comment comment = commentRepository.findById(commentId)
+			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_COMMENT_NOT_FOUND));
+
+		if (!comment.getUser().getId().equals(user.getId()))
+			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
+
+		if (!comment.getCommunity().getId().equals(id))
+			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
+
+		comment.update(request.content());
+		return UpdateCommentResponse.from(comment);
 	}
 }

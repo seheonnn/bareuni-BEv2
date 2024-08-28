@@ -18,6 +18,7 @@ import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
@@ -94,5 +95,15 @@ public class CommunityController {
 		@RequestBody CreateCommentRequest request
 	) {
 		return ApiResponse.onSuccess(communityService.createComment(id, user, request));
+	}
+
+	@PostMapping("/{id}/comment/update/{commentId}")
+	public ApiResponse<CreateCommentResponse> updateComment(
+		@UserResolver User user,
+		@PathVariable Long id,
+		@RequestBody UpdateCommentRequest request,
+		@PathVariable Long commentId
+	) {
+		return ApiResponse.onSuccess(communityService.updateComment(id, user, request, commentId));
 	}
 }
