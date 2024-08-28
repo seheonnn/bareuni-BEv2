@@ -10,9 +10,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
-import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityException;
@@ -20,6 +20,8 @@ import com.bareuni.bareuniv2.domain.community.service.CommunityQueryService;
 import com.bareuni.bareuniv2.domain.community.service.CommunityService;
 import com.bareuni.bareuniv2.domain.page.PageCondition;
 import com.bareuni.bareuniv2.domain.page.PageResponse;
+import com.bareuni.coredomain.domain.comment.Comment;
+import com.bareuni.coredomain.domain.comment.repository.CommentRepository;
 import com.bareuni.coredomain.domain.community.Community;
 import com.bareuni.coredomain.domain.community.CommunityImage;
 import com.bareuni.coredomain.domain.community.repository.CommunityRepository;
@@ -43,8 +45,11 @@ class CommunityServiceTest {
 	CommunityQueryService communityQueryService;
 	@Autowired
 	CommunityRepository communityRepository;
+	@Autowired
+	CommentRepository commentRepository;
 	private User user;
 	private Long communityId;
+	private Long commentId;
 
 	@BeforeEach
 	void setUp() {
@@ -74,6 +79,14 @@ class CommunityServiceTest {
 			.build();
 		em.persist(community);
 		communityId = community.getId();
+
+		Comment comment = Comment.builder()
+			.community(community)
+			.content("댓글 내용")
+			.user(user)
+			.build();
+		em.persist(comment);
+		commentId = comment.getId();
 	}
 
 	@Test
@@ -127,13 +140,13 @@ class CommunityServiceTest {
 	@DisplayName("커뮤니티 업데이트 테스트")
 	void updateCommunityTest() {
 		// given
-		Community community = communityRepository.findById(communityId).orElseThrow();
+		UpdateCommunityRequest request = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
 
 		// when
-		UpdateCommunityRequest request = new UpdateCommunityRequest("커뮤니티 수정 테스트", null, null);
-		communityService.updateCommunity(communityId, user, request);
+		commentId = communityService.updateCommunity(communityId, user, request).id();
 
 		// then
+		Community community = communityRepository.findById(commentId).orElseThrow();
 		Assertions.assertEquals("커뮤니티 수정 테스트", community.getTile());
 	}
 
@@ -167,9 +180,24 @@ class CommunityServiceTest {
 		CreateCommentRequest createCommentRequest = new CreateCommentRequest("댓글 생성 테스트");
 
 		// when
-		CreateCommentResponse savedComment = communityService.createComment(communityId, user, createCommentRequest);
+		commentId = communityService.createComment(communityId, user, createCommentRequest).id();
 
 		//then
-		Assertions.assertEquals("댓글 생성 테스트", savedComment.content());
+		Comment comment = commentRepository.findById(commentId).orElseThrow();
+		Assertions.assertEquals("댓글 생성 테스트", comment.getContent());
+	}
+
+	@Test
+	@DisplayName("댓글 수정 테스트")
+	void updateCommentTest() {
+		// given
+		UpdateCommentRequest request = new UpdateCommentRequest("댓글 수정 테스트");
+
+		// when
+		commentId = communityService.updateComment(communityId, user, request, commentId).id();
+
+		//then
+		Comment comment = commentRepository.findById(commentId).orElseThrow();
+		Assertions.assertEquals("댓글 수정 테스트", comment.getContent());
 	}
 }
