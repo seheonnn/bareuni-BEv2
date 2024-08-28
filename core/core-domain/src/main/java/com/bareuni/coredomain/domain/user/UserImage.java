@@ -28,11 +28,11 @@ public class UserImage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String url;
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private User user;
-
-	private String url;
 
 	public void setUser(User user) {
 		this.user = user;

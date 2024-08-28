@@ -8,6 +8,7 @@ spring:
     group:
       "local": "db, secret, redis, security, s3, monitoring"
       "prod": "db, secret, redis, security, s3, monitoring"
+      "test": "db, secret, redis, security, s3"
     default: local
 
   servlet:

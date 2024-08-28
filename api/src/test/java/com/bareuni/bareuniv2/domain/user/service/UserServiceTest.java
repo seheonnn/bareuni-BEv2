@@ -26,6 +26,8 @@ class UserServiceTest {
 	@Autowired
 	private UserImageRepository userImageRepository;
 
+	private Long savedUserId;
+
 	@BeforeEach
 	void setUp() {
 
@@ -49,14 +51,14 @@ class UserServiceTest {
 
 		// User와 UserImage 간의 연관 관계 설정
 		user.setUserImage(userImage);
-		userRepository.save(user);
+		savedUserId = userRepository.save(user).getId();
 	}
 
 	@Test
 	void testUserImageOrphanRemoval() {
 
 		// given
-		User findUser = userRepository.findById(1L).get();
+		User findUser = userRepository.findById(savedUserId).orElseThrow();
 
 		// when
 		findUser.setUserImage(null);
@@ -66,5 +68,4 @@ class UserServiceTest {
 		Optional<UserImage> userImage = userImageRepository.findById(1L);
 		Assertions.assertTrue(userImage.isEmpty());
 	}
-
 }

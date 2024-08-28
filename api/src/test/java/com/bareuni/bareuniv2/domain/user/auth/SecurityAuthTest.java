@@ -1,6 +1,6 @@
 package com.bareuni.bareuniv2.domain.user.auth;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,6 +22,7 @@ import com.bareuni.coredomain.domain.user.RoleType;
 import com.bareuni.coredomain.domain.user.User;
 import com.bareuni.coredomain.domain.user.repository.UserRepository;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
@@ -53,8 +55,8 @@ class SecurityAuthTest {
 		Long newUserId = authService.join(request).id();
 
 		// then
-		Long savedUserId = userRepository.findById(1L).get().getId();
-		Assertions.assertThat(newUserId.equals(savedUserId));
+		User savedUser = userRepository.findByEmail("bareuni@gmail.com").orElseThrow();
+		Assertions.assertEquals(newUserId, savedUser.getId());
 	}
 
 	@Test
@@ -88,6 +90,6 @@ class SecurityAuthTest {
 			.andReturn();
 
 		// then
-		Assertions.assertThat(response.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
+		Assertions.assertEquals(response.getResponse().getStatus(), HttpStatus.CREATED.value());
 	}
 }

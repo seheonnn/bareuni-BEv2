@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
@@ -29,6 +30,7 @@ import com.bareuni.coredomain.domain.user.UserImage;
 
 import jakarta.persistence.EntityManager;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @Transactional
 class CommunityServiceTest {
@@ -154,10 +156,12 @@ class CommunityServiceTest {
 			.user(user)
 			.build();
 
-		CreateCommentRequest request = new CreateCommentRequest("댓글 생성 테스트");
+		CreateCommunityRequest createCommunityRequest = new CreateCommunityRequest("커뮤니티 생성 테스트", "커뮤니티 생성 테스트", null);
+		communityService.createCommunity(user, createCommunityRequest).id();
+		CreateCommentRequest createCommentRequest = new CreateCommentRequest("댓글 생성 테스트");
 
 		// when
-		CreateCommentResponse savedComment = communityService.createComment(1L, user, request);
+		CreateCommentResponse savedComment = communityService.createComment(1L, user, createCommentRequest);
 
 		//then
 		Assertions.assertEquals("댓글 생성 테스트", savedComment.content());
