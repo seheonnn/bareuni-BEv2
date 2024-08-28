@@ -10,9 +10,10 @@ public record UserSummary(
 	String profileUrl
 ) {
 	public static UserSummary from(User user) {
+		String url = user.getUserImage() == null ? null : user.getUserImage().getUrl();
 		return UserSummary.builder()
 			.username(user.getUsername())
-			.profileUrl(user.getUserImage().getUrl())
+			.profileUrl(url)
 			.build();
 	}
 }
