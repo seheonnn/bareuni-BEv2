@@ -81,4 +81,8 @@ public class Community extends BaseEntity {
 		this.tile = tile == null ? this.tile : tile;
 		this.content = content == null ? this.content : content;
 	}
+
+	public int getCommentCount() {
+		return comments.size();
+	}
 }

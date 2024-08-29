@@ -12,15 +12,15 @@ public record GetCommunitiesResponse(
 	String title,
 	String content,
 	UserSummary user,
-	long commentCnt
+	int commentCnt
 ) {
-	public static GetCommunitiesResponse of(Community community, Long commentCnt) {
+	public static GetCommunitiesResponse from(Community community) {
 		return GetCommunitiesResponse.builder()
 			.id(community.getId())
 			.title(community.getTile())
 			.content(community.getContent())
 			.user(UserSummary.from(community.getUser()))
-			.commentCnt(commentCnt)
+			.commentCnt(community.getCommentCount())
 			.build();
 	}
 }
