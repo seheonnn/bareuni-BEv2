@@ -14,9 +14,10 @@ public record GetCommunityResponse(
 	Long id,
 	String content,
 	UserSummary user,
-	List<String> imageUrls
+	List<String> imageUrls,
+	long commentCnt
 ) {
-	public static GetCommunityResponse from(Community community) {
+	public static GetCommunityResponse of(Community community, Long commentCnt) {
 		List<String> imageUrls = community.getCommunityImages().stream()
 			.map(CommunityImage::getUrl)
 			.toList();
@@ -26,6 +27,7 @@ public record GetCommunityResponse(
 			.content(community.getContent())
 			.user(UserSummary.from(community.getUser()))
 			.imageUrls(imageUrls)
+			.commentCnt(commentCnt)
 			.build();
 	}
 }
