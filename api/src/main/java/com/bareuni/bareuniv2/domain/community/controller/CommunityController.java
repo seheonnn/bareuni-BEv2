@@ -17,7 +17,7 @@ import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
-import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.GetCommunitiesResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
@@ -82,11 +82,18 @@ public class CommunityController {
 	}
 
 	@GetMapping("/read")
-	public ApiResponse<PageResponse<GetCommunityResponse>> getCommunities(
+	public ApiResponse<PageResponse<GetCommunitiesResponse>> getCommunities(
 		@ModelAttribute @Valid PageCondition pageCondition
 	) {
 		return ApiResponse.onSuccess(communityQueryService.getCommunities(pageCondition));
 	}
+
+	// @GetMapping("/read/{id}")
+	// public ApiResponse<GetCommunitiesResponse> getCommunity(
+	// 	@PathVariable Long id
+	// ) {
+	// 	return ApiResponse.onSuccess(communityQueryService.getCommunities(pageCondition));
+	// }
 
 	@PostMapping("/{id}/comment/create")
 	public ApiResponse<CreateCommentResponse> createComment(

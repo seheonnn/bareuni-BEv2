@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
-import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
+import com.bareuni.bareuniv2.domain.community.dto.GetCommunitiesResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
@@ -129,7 +129,7 @@ class CommunityServiceTest {
 		PageCondition pageCondition = new PageCondition(1, 10); // 페이지 조건 설정
 
 		// when
-		PageResponse<GetCommunityResponse> communities = communityQueryService.getCommunities(pageCondition);
+		PageResponse<GetCommunitiesResponse> communities = communityQueryService.getCommunities(pageCondition);
 
 		// then
 		Assertions.assertNotNull(communities, "결과가 null이 아님을 확인합니다.");

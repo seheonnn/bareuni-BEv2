@@ -140,8 +140,8 @@ public class CommunityService {
 			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
 		Comment comment = request.toEntity();
 
+		community.addComment(comment);
 		comment.setUser(user);
-		comment.setCommunity(community);
 
 		return CreateCommentResponse.from(commentRepository.save(comment));
 	}
