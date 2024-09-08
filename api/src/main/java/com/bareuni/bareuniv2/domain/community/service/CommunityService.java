@@ -77,7 +77,7 @@ public class CommunityService {
 		Community community = request.toEntity();
 		community.setUser(user);
 
-		String url = s3Service.uploadImage(image);
+		String url = s3Service.uploadFileOrigin(image);
 		CommunityImage communityImage = CommunityImage.builder()
 			.community(community)
 			.imageOrder(1)

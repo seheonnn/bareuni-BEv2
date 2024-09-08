@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.bareuni.coreinfras3.convert.webp.WebpConvertService;
 import com.bareuni.coreinfras3.dto.S3Response;
@@ -89,5 +90,21 @@ public class S3Service {
 				.toString(),
 			amazonS3.getUrl(s3Config.getBucket(), fileName).toString()
 		);
+	}
+
+	public String uploadFileOrigin(MultipartFile file) {
+		String filePath =
+			UUID.randomUUID() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+		ObjectMetadata metadata = new ObjectMetadata();
+		metadata.setContentLength(file.getSize());
+		try {
+			amazonS3.putObject(
+				new PutObjectRequest(s3Config.getBucket(), s3Config.getFolder() + filePath, file.getInputStream(),
+					metadata));
+		} catch (IOException e) {
+			log.error("error at AmazonS3Manager uploadFile : {}", (Object)e.getStackTrace());
+		}
+
+		return amazonS3.getUrl(s3Config.getBucket(), s3Config.getFolder() + filePath).toString();
 	}
 }
