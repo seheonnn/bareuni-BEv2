@@ -1,26 +1,13 @@
 ### 모든 치과 정보를 한 번에, 바른이
 
 # ✏️ 프로젝트 요약
-- 백엔드를 담당하여 커뮤니티 CRUD, 댓글 CRUD, 좋아요 기능, CI/CD 자동화 등에 참여하였습니다.
-- 지역별로 치과를 검색하여 치과 정보를 습득할 수 있습니다.
-- 치과와의 제휴를 통해 예약 기능을 활성화하여 사용자는 신속하게 예약으로 이어질 수 있습니다.
-- 사용자는 커뮤니티를 통해 교정 및 관련 정보를 습득할 수 있습니다.
-- 영수증 인증 후기를 통하여 보다 정확한 후기를 참고할 수 있습니다. 
+- 
 
 # 🎯 프로젝트 목표 및 역할
-- JWT 토큰 및 Spring Security 학습
-- QueryDSL 활용
-- [Redis](https://redis.io/)를 이용한 JWT 토큰 관리
-- Swagger 및 Postman을 사용한 Api 테스트
-- [Amazon AWS, RDS](https://aws.amazon.com/ko/)를 이용한 배포
-- Amazon S3를 이용한 이미지 처리
-- Inner Class 기반 DTO 관리
-- [Docker](https://www.docker.com/) + [Github Actions](https://docs.github.com/ko/actions)를 이용한 CI/CD 자동화
-- [ZeroSSL](https://zerossl.com/) 이용하여 SSL 인증서 발급 후 https 적용
+- 
 
 # ✨ 트러블슈팅 ✨
-- Docker + GitHub Actions 배포 자동화 시 수정 사항 반영 이슈 - [블로그](https://seheonnn.tistory.com/4)
-- Docker + GitHub Actions 배포 환경 Redis Connection refused 이슈 - [블로그](https://seheonnn.tistory.com/5)
+- 
 
 # 🛠️ 사용 기술
 Front-End : <img src="https://img.shields.io/badge/Swift-FA7343?style=for-the-flat&logo=swift&logoColor=white">
