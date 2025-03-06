@@ -38,4 +38,23 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
 
 		return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
 	}
+
+	// // PageImpl을 사용한 기존 방식
+	// @Override
+	// public Page<Community> getCommunities(Pageable pageable) {
+	// 	List<Community> content = queryFactory
+	// 		.selectFrom(community)
+	// 		.leftJoin(community.user, user).fetchJoin()
+	// 		.offset(pageable.getOffset())
+	// 		.limit(pageable.getPageSize())
+	// 		.fetch();
+	//
+	// 	// 항상 count 쿼리를 실행
+	// 	long total = queryFactory
+	// 		.select(community.count())
+	// 		.from(community)
+	// 		.fetchOne();
+	//
+	// 	return new PageImpl<>(content, pageable, total);
+	// }
 }
