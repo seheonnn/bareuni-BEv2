@@ -7,19 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bareuni.bareuniv2.domain.community.converter.CommunityImageConverter;
-import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
-import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
-import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
-import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityException;
-import com.bareuni.coredomain.domain.comment.Comment;
-import com.bareuni.coredomain.domain.comment.repository.CommentRepository;
 import com.bareuni.coredomain.domain.community.Community;
 import com.bareuni.coredomain.domain.community.CommunityImage;
 import com.bareuni.coredomain.domain.community.repository.CommunityImageRepository;
@@ -39,7 +33,7 @@ public class CommunityService {
 	private final CommunityRepository communityRepository;
 	private final CommunityImageRepository communityImageRepository;
 	private final S3Service s3Service;
-	private final CommentRepository commentRepository;
+	// private final CommentRepository commentRepository;
 
 	public UploadCommunityImageResponse uploadCommunityImage(MultipartFile file, int order) {
 		String url = s3Service.uploadImage(file);
@@ -135,28 +129,29 @@ public class CommunityService {
 		return "삭제 성공";
 	}
 
-	public CreateCommentResponse createComment(Long id, User user, CreateCommentRequest request) {
-		Community community = communityRepository.findByIdWithUser(id)
-			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
-		Comment comment = request.toEntity();
-
-		community.addComment(comment);
-		comment.setUser(user);
-
-		return CreateCommentResponse.from(commentRepository.save(comment));
-	}
-
-	public CreateCommentResponse updateComment(Long id, User user, UpdateCommentRequest request, Long commentId) {
-		Comment comment = commentRepository.findByIdWithUserAndCommunity(commentId)
-			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_COMMENT_NOT_FOUND));
-
-		if (!comment.getUser().getId().equals(user.getId()))
-			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
-
-		if (!comment.getCommunity().getId().equals(id))
-			throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
-
-		comment.update(request.content());
-		return UpdateCommentResponse.from(comment);
-	}
+	// Facade 분리
+	// public CreateCommentResponse createComment(Long id, User user, CreateCommentRequest request) {
+	// 	Community community = communityRepository.findByIdWithUser(id)
+	// 		.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
+	// 	Comment comment = request.toEntity();
+	//
+	// 	community.addComment(comment);
+	// 	comment.setUser(user);
+	//
+	// 	return CreateCommentResponse.from(commentRepository.save(comment));
+	// }
+	//
+	// public CreateCommentResponse updateComment(Long id, User user, UpdateCommentRequest request, Long commentId) {
+	// 	Comment comment = commentRepository.findByIdWithUserAndCommunity(commentId)
+	// 		.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_COMMENT_NOT_FOUND));
+	//
+	// 	if (!comment.getUser().getId().equals(user.getId()))
+	// 		throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
+	//
+	// 	if (!comment.getCommunity().getId().equals(id))
+	// 		throw new CommunityException(CommunityErrorCode.COMMUNITY_FORBIDDEN);
+	//
+	// 	comment.update(request.content());
+	// 	return UpdateCommentResponse.from(comment);
+	// }
 }

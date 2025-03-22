@@ -13,12 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bareuni.bareuniv2.auth.annotation.UserResolver;
-import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
-import com.bareuni.bareuniv2.domain.community.dto.CreateCommentResponse;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunitiesResponse;
-import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
@@ -95,22 +92,23 @@ public class CommunityController {
 	// 	return ApiResponse.onSuccess(communityQueryService.getCommunities(pageCondition));
 	// }
 
-	@PostMapping("/{id}/comment/create")
-	public ApiResponse<CreateCommentResponse> createComment(
-		@UserResolver User user,
-		@PathVariable Long id,
-		@RequestBody CreateCommentRequest request
-	) {
-		return ApiResponse.onSuccess(communityService.createComment(id, user, request));
-	}
-
-	@PostMapping("/{id}/comment/update/{commentId}")
-	public ApiResponse<CreateCommentResponse> updateComment(
-		@UserResolver User user,
-		@PathVariable Long id,
-		@RequestBody UpdateCommentRequest request,
-		@PathVariable Long commentId
-	) {
-		return ApiResponse.onSuccess(communityService.updateComment(id, user, request, commentId));
-	}
+	// 도메인 분리
+	// @PostMapping("/{id}/comment/create")
+	// public ApiResponse<CreateCommentResponse> createComment(
+	// 	@UserResolver User user,
+	// 	@PathVariable Long id,
+	// 	@RequestBody CreateCommentRequest request
+	// ) {
+	// 	return ApiResponse.onSuccess(communityService.createComment(id, user, request));
+	// }
+	//
+	// @PostMapping("/{id}/comment/update/{commentId}")
+	// public ApiResponse<CreateCommentResponse> updateComment(
+	// 	@UserResolver User user,
+	// 	@PathVariable Long id,
+	// 	@RequestBody UpdateCommentRequest request,
+	// 	@PathVariable Long commentId
+	// ) {
+	// 	return ApiResponse.onSuccess(communityService.updateComment(id, user, request, commentId));
+	// }
 }

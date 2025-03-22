@@ -9,15 +9,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bareuni.bareuniv2.domain.community.dto.CreateCommentRequest;
+import com.bareuni.bareuniv2.domain.comment.dto.CreateCommentRequest;
+import com.bareuni.bareuniv2.domain.comment.dto.UpdateCommentRequest;
+import com.bareuni.bareuniv2.domain.comment.service.CommentService;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunitiesResponse;
-import com.bareuni.bareuniv2.domain.community.dto.UpdateCommentRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityException;
 import com.bareuni.bareuniv2.domain.community.service.CommunityQueryService;
 import com.bareuni.bareuniv2.domain.community.service.CommunityService;
+import com.bareuni.bareuniv2.domain.facade.CommunityCommentFacade;
 import com.bareuni.bareuniv2.domain.page.PageCondition;
 import com.bareuni.bareuniv2.domain.page.PageResponse;
 import com.bareuni.coredomain.domain.comment.Comment;
@@ -43,6 +45,10 @@ class CommunityServiceTest {
 	CommunityService communityService;
 	@Autowired
 	CommunityQueryService communityQueryService;
+	@Autowired
+	CommentService commentService;
+	@Autowired
+	CommunityCommentFacade communityCommentFacade;
 	@Autowired
 	CommunityRepository communityRepository;
 	@Autowired
@@ -180,7 +186,7 @@ class CommunityServiceTest {
 		CreateCommentRequest createCommentRequest = new CreateCommentRequest("댓글 생성 테스트");
 
 		// when
-		commentId = communityService.createComment(communityId, user, createCommentRequest).id();
+		commentId = communityCommentFacade.createComment(communityId, user, createCommentRequest).id();
 
 		//then
 		Comment comment = commentRepository.findById(commentId).orElseThrow();
@@ -194,7 +200,7 @@ class CommunityServiceTest {
 		UpdateCommentRequest request = new UpdateCommentRequest("댓글 수정 테스트");
 
 		// when
-		commentId = communityService.updateComment(communityId, user, request, commentId).id();
+		commentId = commentService.updateComment(communityId, user, request, commentId).id();
 
 		//then
 		Comment comment = commentRepository.findById(commentId).orElseThrow();
