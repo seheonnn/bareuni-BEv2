@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.bareuni.coredomain.domain.comment.Comment;
 import com.bareuni.coredomain.domain.community.Community;
 
-public interface CommentRepository extends JpaRepository<Comment, Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long>, CommentCustomRepository {
 
 	@Query("SELECT c FROM Comment c JOIN FETCH c.user u JOIN FETCH c.community com WHERE c.id = :id")
 	Optional<Comment> findByIdWithUserAndCommunity(Long id);

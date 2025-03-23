@@ -16,6 +16,7 @@ import com.bareuni.bareuniv2.auth.annotation.UserResolver;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.CreateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunitiesResponse;
+import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityRequest;
 import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
@@ -85,12 +86,12 @@ public class CommunityController {
 		return ApiResponse.onSuccess(communityQueryService.getCommunities(pageCondition));
 	}
 
-	// @GetMapping("/read/{id}")
-	// public ApiResponse<GetCommunitiesResponse> getCommunity(
-	// 	@PathVariable Long id
-	// ) {
-	// 	return ApiResponse.onSuccess(communityQueryService.getCommunities(pageCondition));
-	// }
+	@GetMapping("/read/{id}")
+	public ApiResponse<GetCommunityResponse> getCommunity(
+		@PathVariable Long id
+	) {
+		return ApiResponse.onSuccess(communityQueryService.getCommunity(id));
+	}
 
 	// 도메인 분리
 	// @PostMapping("/{id}/comment/create")

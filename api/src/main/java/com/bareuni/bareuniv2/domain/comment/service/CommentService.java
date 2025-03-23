@@ -40,5 +40,4 @@ public class CommentService {
 		comment.update(request.content());
 		return UpdateCommentResponse.from(comment);
 	}
-
 }

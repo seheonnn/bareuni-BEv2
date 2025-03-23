@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bareuni.bareuniv2.domain.community.dto.GetCommunitiesResponse;
+import com.bareuni.bareuniv2.domain.community.dto.GetCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityErrorCode;
 import com.bareuni.bareuniv2.domain.community.exception.CommunityException;
 import com.bareuni.bareuniv2.domain.page.PageCondition;
@@ -31,6 +32,15 @@ public class CommunityQueryService {
 		Page<Community> communities = communityRepository.getCommunities(pageable);
 
 		return PageResponse.of(communities.map(GetCommunitiesResponse::from));
+
+	}
+
+	public GetCommunityResponse getCommunity(Long id) {
+
+		Community community = communityRepository.findById(id)
+			.orElseThrow(() -> new CommunityException(CommunityErrorCode.COMMUNITY_NOT_FOUND));
+
+		return GetCommunityResponse.of(community, community.getCommentCount());
 
 	}
 
