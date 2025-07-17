@@ -21,7 +21,7 @@ public record CreateCommunityResponse(
 
 		return CreateCommunityResponse.builder()
 			.id(community.getId())
-			.title(community.getTile())
+			.title(community.getTitle())
 			.content(community.getContent())
 			.imageUrls(imageUrls)
 			.build();

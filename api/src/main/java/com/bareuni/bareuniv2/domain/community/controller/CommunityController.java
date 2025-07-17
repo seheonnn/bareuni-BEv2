@@ -22,6 +22,7 @@ import com.bareuni.bareuniv2.domain.community.dto.UpdateCommunityResponse;
 import com.bareuni.bareuniv2.domain.community.dto.UploadCommunityImageResponse;
 import com.bareuni.bareuniv2.domain.community.service.CommunityQueryService;
 import com.bareuni.bareuniv2.domain.community.service.CommunityService;
+import com.bareuni.bareuniv2.domain.facade.CommunityCommentFacade;
 import com.bareuni.bareuniv2.domain.page.PageCondition;
 import com.bareuni.bareuniv2.domain.page.PageResponse;
 import com.bareuni.coredomain.domain.user.User;
@@ -37,6 +38,7 @@ public class CommunityController {
 
 	private final CommunityService communityService;
 	private final CommunityQueryService communityQueryService;
+	private final CommunityCommentFacade communityCommentFacade;
 
 	@PostMapping(value = "/upload-image/{order}", consumes = "multipart/form-data")
 	public ApiResponse<UploadCommunityImageResponse> uploadCommunityImage(
@@ -84,6 +86,13 @@ public class CommunityController {
 		@ModelAttribute @Valid PageCondition pageCondition
 	) {
 		return ApiResponse.onSuccess(communityQueryService.getCommunities(pageCondition));
+	}
+
+	@GetMapping("/read-v3")
+	public ApiResponse<PageResponse<GetCommunitiesResponse>> getCommunitiesV3(
+		@ModelAttribute @Valid PageCondition pageCondition
+	) {
+		return ApiResponse.onSuccess(communityCommentFacade.getCommunitiesV3(pageCondition));
 	}
 
 	@GetMapping("/read/{id}")

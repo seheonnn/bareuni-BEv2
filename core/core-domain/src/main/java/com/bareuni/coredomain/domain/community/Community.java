@@ -41,7 +41,7 @@ public class Community extends BaseEntity {
 	private Long id;
 
 	@Column(nullable = false)
-	private String tile;
+	private String title;
 
 	@Column(nullable = false)
 	private String content;
@@ -78,7 +78,7 @@ public class Community extends BaseEntity {
 	}
 
 	public void update(String tile, String content) {
-		this.tile = tile == null ? this.tile : tile;
+		this.title = tile == null ? this.title : tile;
 		this.content = content == null ? this.content : content;
 	}
 

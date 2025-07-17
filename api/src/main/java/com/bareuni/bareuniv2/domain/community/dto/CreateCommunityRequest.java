@@ -17,7 +17,7 @@ public record CreateCommunityRequest(
 ) {
 	public Community toEntity() {
 		return Community.builder()
-			.tile(title)
+			.title(title)
 			.content(content)
 			.user(null)
 			.communityImages(new ArrayList<>())

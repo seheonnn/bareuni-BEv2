@@ -12,6 +12,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -26,7 +27,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "comment")
+@Table(
+	name = "comment",
+	indexes = {
+		@Index(name = "idx_comment_community_created_at", columnList = "community_id, created_at DESC")
+	}
+)
 public class Comment extends BaseEntity {
 
 	@Id

@@ -23,6 +23,7 @@ public class CommunityCustomRepositoryImpl implements CommunityCustomRepository 
 		this.queryFactory = new JPAQueryFactory(em);
 	}
 
+	// // PageableExecutionUtils 사용
 	@Override
 	public Page<Community> getCommunities(Pageable pageable) {
 		List<Community> content = queryFactory
