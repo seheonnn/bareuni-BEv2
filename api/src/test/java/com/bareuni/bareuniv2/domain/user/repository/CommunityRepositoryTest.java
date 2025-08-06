@@ -55,7 +55,7 @@ class CommunityRepositoryTest {
 	void save() {
 		// given
 		Community community = Community.builder()
-			.tile("커뮤니티 제목")
+			.title("커뮤니티 제목")
 			.content("커뮤니티 내용")
 			.user(user)
 			.build();
